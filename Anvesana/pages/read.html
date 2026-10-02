@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Read — Anveṣaṇa</title>
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="../index.html" class="logo">
+        ✦ Anveṣaṇa
+    </a>
+
+    <nav class="main-nav">
+        <a href="../index.html">Home</a>
+        <a href="play.html">Play</a>
+        <a href="character.html">Character</a>
+        <a href="read.html" class="active">Read</a>
+        <a href="write.html">Write</a>
+        <a href="learn.html">Learn</a>
+        <a href="focus.html">Focus</a>
+    </nav>
+
+    <div class="stardust-container">
+        <button id="stardustButton" class="stardust-button">
+            ⭐ <span id="stardustAmount">0</span>
+        </button>
+
+        <div id="stardustPanel" class="stardust-panel">
+            <h3>⭐ Stardust</h3>
+            <p id="stardustTotal">You have 0 Stardust.</p>
+            <div id="stardustHistory"></div>
+        </div>
+    </div>
+
+</header>
+
+
+<main class="page-content">
+
+    <!-- ========================= -->
+    <!-- LIBRARY -->
+    <!-- ========================= -->
+
+    <section id="libraryView" class="library-section">
+
+        <div class="library-heading">
+            <div>
+                <p class="library-label">ANVEṢAṆA LIBRARY</p>
+
+                <h1>📚 The Library</h1>
+
+                <p>
+                    Wander the shelves. Choose a book.
+                    Open it and begin exploring.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="library-room">
+
+            <div class="library-shelf-top"></div>
+
+            <div id="publishedWritings" class="library-bookshelf">
+                <p class="library-loading">
+                    Searching the shelves...
+                </p>
+            </div>
+
+            <div class="library-shelf-bottom"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- OPEN BOOK -->
+    <!-- ========================= -->
+
+    <section id="bookView" class="book-reading-section">
+
+        <button id="backToLibrary" class="back-library-button">
+            ← Back to Library
+        </button>
+
+
+        <div class="reading-header">
+
+            <div>
+                <p class="library-label">NOW READING</p>
+                <h1 id="readingBookTitle">Book</h1>
+                <p id="readingBookAuthor"></p>
+            </div>
+
+        </div>
+
+
+        <div class="open-book">
+
+            <div class="book-page left-page">
+
+                <div class="page-content-inner">
+                    <div id="leftPage"></div>
+                </div>
+
+                <span id="leftPageNumber" class="page-number">
+                    1
+                </span>
+
+            </div>
+
+
+            <div class="book-spine"></div>
+
+
+            <div class="book-page right-page">
+
+                <div class="page-content-inner">
+                    <div id="rightPage"></div>
+                </div>
+
+                <span id="rightPageNumber" class="page-number">
+                    2
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="book-controls">
+
+            <button id="previousPage" class="book-nav-button">
+                ← Previous
+            </button>
+
+            <span id="pageIndicator">
+                Pages 1–2
+            </span>
+
+            <button id="nextPage" class="book-nav-button">
+                Next →
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<style>
+
+
+/* =====================================
+   VENU AREA
+   ===================================== */
+
+.venu-area {
+    width: min(1100px, 94%);
+    margin: 0 auto 80px;
+}
+
+
+/* =====================================
+   VENU STAGE
+   ===================================== */
+
+.venu-stage {
+    min-height: 620px;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(150, 120, 220, 0.22),
+            transparent 45%
+        ),
+        linear-gradient(
+            135deg,
+            #11183d,
+            #24164c,
+            #0d1638
+        );
+}
+
+
+/* =====================================
+   STARS
+   ===================================== */
+
+.venu-star {
+    position: absolute;
+    color: #eeeef5;
+    opacity: 0.75;
+
+    animation:
+        venuTwinkle 3s
+        infinite ease-in-out;
+}
+
+.star-one {
+    top: 13%;
+    left: 17%;
+    font-size: 25px;
+}
+
+.star-two {
+    top: 24%;
+    right: 17%;
+    font-size: 20px;
+    animation-delay: 1s;
+}
+
+.star-three {
+    bottom: 23%;
+    left: 20%;
+    font-size: 25px;
+    animation-delay: 1.7s;
+}
+
+.star-four {
+    bottom: 15%;
+    right: 21%;
+    font-size: 24px;
+    animation-delay: 2.3s;
+}
+
+@keyframes venuTwinkle {
+
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: scale(0.9);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+
+/* =====================================
+   VENU CHARACTER
+   ===================================== */
+
+.venu-character {
+    width: 390px;
+    height: 430px;
+
+    position: relative;
+
+    cursor: pointer;
+
+    animation:
+        venuFloat 4s
+        ease-in-out
+        infinite;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.venu-character:hover {
+    transform: scale(1.02);
+}
+
+@keyframes venuFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+
+/* =====================================
+   CRESCENT MOON
+   ===================================== */
+
+.venu-moon {
+    position: absolute;
+
+    width: 260px;
+    height: 390px;
+
+    left: 25px;
+    top: 20px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eee9ff,
+            #b9a8e7
+        );
+
+    transform:
+        rotate(-18deg);
+
+    z-index: 1;
+
+    box-shadow:
+        0 0 25px
+        rgba(
+            190,
+            170,
+            255,
+            0.18
+        );
+}
+
+
+/*
+   This cuts the inside out of the moon.
+*/
+
+.moon-inner {
+    position: absolute;
+
+    width: 245px;
+    height: 375px;
+
+    left: 48px;
+    top: -18px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #11183d,
+            #24164c
+        );
+}
+
+
+/* =====================================
+   BODY / SEATED TORSO
+   ===================================== */
+
+.venu-body {
+    position: absolute;
+
+    left: 150px;
+    top: 145px;
+
+    width: 105px;
+    height: 150px;
+
+    z-index: 5;
+
+    transform:
+        rotate(-9deg);
+}
+
+
+/* =====================================
+   DRESS
+   ===================================== */
+
+.venu-dress {
+    position: absolute;
+
+    left: -8px;
+    top: 15px;
+
+    width: 115px;
+    height: 145px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #55a873,
+            #286042
+        );
+
+    border-radius:
+        28px 28px 18px 18px;
+
+    clip-path: polygon(
+        18% 0,
+        82% 0,
+        100% 100%,
+        0 100%
+    );
+
+    z-index: 2;
+}
+
+
+/* =====================================
+   JACKET
+   ===================================== */
+
+.venu-jacket {
+    position: absolute;
+
+    left: -10px;
+    top: 8px;
+
+    width: 112px;
+    height: 88px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #292932,
+            #111118
+        );
+
+    border-radius:
+        17px 17px 13px 13px;
+
+    border-left:
+        5px solid #171724;
+
+    border-right:
+        5px solid #171724;
+
+    z-index: 4;
+}
+
+
+/*
+   Green opening in the jacket.
+*/
+
+.venu-jacket::after {
+    content: "";
+
+    position: absolute;
+
+    width: 38px;
+    height: 76px;
+
+    left: 32px;
+    top: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #55a873,
+            #286042
+        );
+
+    clip-path:
+        polygon(
+            20% 0,
+            80% 0,
+            100% 100%,
+            0 100%
+        );
+}
+
+
+/* =====================================
+   SEATED PANTS
+   ===================================== */
+
+.venu-pants {
+    position: absolute;
+
+    left: 40px;
+    top: 120px;
+
+    width: 145px;
+    height: 65px;
+
+    z-index: 6;
+
+    transform:
+        rotate(5deg);
+}
+
+.venu-pants span {
+    position: absolute;
+
+    display: block;
+
+    height: 54px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #17171f,
+            #292934
+        ) !important;
+
+    border-radius:
+        8px 8px 12px 12px;
+}
+
+
+/*
+   Upper leg extending toward the right.
+*/
+
+.venu-pants span:first-child {
+    width: 115px;
+
+    left: 0;
+    top: 0;
+
+    transform:
+        rotate(8deg);
+}
+
+
+/*
+   Lower/overlapping leg.
+*/
+
+.venu-pants span:last-child {
+    width: 82px;
+
+    left: 62px;
+    top: 28px;
+
+    transform:
+        rotate(-8deg);
+}
+
+
+/* =====================================
+   NECK
+   ===================================== */
+
+.venu-neck {
+    position: absolute;
+
+    width: 25px;
+    height: 32px;
+
+    left: 208px;
+    top: 127px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #98603f,
+            #b77c58
+        );
+
+    border-radius:
+        0 0 10px 10px;
+
+    z-index: 7;
+}
+
+
+/* =====================================
+   HEAD
+   ===================================== */
+
+.venu-head {
+    position: absolute;
+
+    left: 190px;
+    top: 60px;
+
+    width: 105px;
+    height: 100px;
+
+    z-index: 10;
+
+    transform:
+        rotate(-3deg);
+}
+
+
+/* =====================================
+   FACE — SIDE PROFILE
+   ===================================== */
+
+.venu-face {
+    position: absolute;
+
+    left: 10px;
+    top: 8px;
+
+    width: 78px;
+    height: 83px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b77c58,
+            #98603f
+        );
+
+    border-radius:
+        45% 48% 48% 50%;
+
+    z-index: 2;
+}
+
+
+/*
+   Nose.
+
+   This little shape makes the face
+   read as a side profile instead of
+   a front-facing circle.
+*/
+
+.venu-face::after {
+    content: "";
+
+    position: absolute;
+
+    width: 19px;
+    height: 16px;
+
+    right: -12px;
+    top: 36px;
+
+    background:
+        #a96e4b;
+
+    clip-path:
+        polygon(
+            0 20%,
+            100% 50%,
+            0 80%
+        );
+}
+
+
+/* =====================================
+   HAIR
+   ===================================== */
+
+.venu-hair {
+    position: absolute;
+
+    width: 100px;
+    height: 105px;
+
+    left: 0;
+    top: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+/* Top */
+
+.hair-top {
+    position: absolute;
+
+    width: 91px;
+    height: 52px;
+
+    left: 4px;
+    top: -5px;
+
+    border-radius:
+        55% 50% 40% 35%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #15151b,
+            #292832
+        );
+}
+
+
+/* Back hair */
+
+.hair-left {
+    position: absolute;
+
+    width: 27px;
+    height: 82px;
+
+    left: -2px;
+    top: 22px;
+
+    border-radius:
+        60% 20% 45% 55%;
+
+    background:
+        #17171d;
+}
+
+
+/* Front curl */
+
+.hair-right {
+    position: absolute;
+
+    width: 26px;
+    height: 57px;
+
+    right: 7px;
+    top: 18px;
+
+    border-radius:
+        30% 60% 50% 30%;
+
+    background:
+        #17171d;
+}
+
+
+/* =====================================
+   EYE
+   ===================================== */
+
+.venu-eye {
+    position: absolute;
+
+    width: 9px;
+    height: 6px;
+
+    left: 56px;
+    top: 36px;
+
+    border-radius:
+        50%;
+
+    background:
+        #17131b;
+
+    z-index: 8;
+}
+
+
+/*
+   Hide the second eye because
+   we're looking at Venu in profile.
+*/
+
+.right-eye {
+    display: none;
+}
+
+
+/* =====================================
+   CAT-EYE GLASSES
+   ===================================== */
+
+.venu-glasses {
+    position: absolute;
+
+    width: 31px;
+    height: 20px;
+
+    top: 29px;
+
+    border:
+        2px solid #20202a;
+
+    background:
+        rgba(
+            225,
+            220,
+            240,
+            0.12
+        );
+
+    z-index: 10;
+}
+
+
+/*
+   Visible profile lens.
+*/
+
+.left-glass {
+    left: 45px;
+
+    transform:
+        rotate(-5deg)
+        skewX(-9deg);
+
+    border-radius:
+        9px 4px 8px 7px;
+}
+
+
+/*
+   Hide the far lens.
+*/
+
+.right-glass {
+    display: none;
+}
+
+
+.glasses-bridge {
+    display: none;
+}
+
+
+/* =====================================
+   EARRINGS
+   ===================================== */
+
+.star-earring {
+    position: absolute;
+
+    color: #d8d8df;
+
+    font-size: 12px;
+
+    z-index: 12;
+}
+
+.left-earring {
+    left: 2px;
+    top: 55px;
+}
+
+.right-earring {
+    display: none;
+}
+
+
+/* =====================================
+   NECKLACE
+   ===================================== */
+
+.venu-necklace {
+    position: absolute;
+
+    width: 24px;
+    height: 28px;
+
+    left: 209px;
+    top: 135px;
+
+    z-index: 13;
+
+    border-bottom:
+        2px solid #c9c9d2;
+
+    border-radius:
+        0 0 15px 15px;
+}
+
+.venu-necklace span {
+    position: absolute;
+
+    width: 13px;
+    height: 13px;
+
+    left: 5px;
+    top: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c58cff,
+            #7a3fc0
+        );
+
+    transform:
+        rotate(45deg);
+
+    border-radius: 3px;
+
+    box-shadow:
+        0 0 10px
+        rgba(
+            170,
+            110,
+            255,
+            0.65
+        );
+}
+
+
+/* =====================================
+   BOOK
+   ===================================== */
+
+.venu-book {
+    position: absolute;
+
+    left: 215px;
+    top: 190px;
+
+    width: 105px;
+    height: 75px;
+
+    display: flex;
+
+    z-index: 15;
+
+    transform:
+        rotate(-8deg);
+
+    filter:
+        drop-shadow(
+            0 5px 8px
+            rgba(
+                0,
+                0,
+                0,
+                0.3
+            )
+        );
+}
+
+.book-page-left,
+.book-page-right {
+    width: 50%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f6f1e5,
+            #ddd5c3
+        );
+
+    border:
+        1px solid #aaa39a;
+}
+
+.book-page-left {
+    border-radius:
+        8px 2px 2px 8px;
+}
+
+.book-page-right {
+    border-radius:
+        2px 8px 8px 2px;
+}
+
+
+/* =====================================
+   ARMS
+   ===================================== */
+
+.venu-arm {
+    position: absolute;
+
+    width: 18px;
+    height: 83px;
+
+    top: 180px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #98603f,
+            #b77c58
+        );
+
+    z-index: 17;
+}
+
+
+/*
+   Back arm reaching toward the book.
+*/
+
+.left-arm {
+    left: 187px;
+
+    transform:
+        rotate(-52deg);
+}
+
+
+/*
+   Front arm resting across the book.
+*/
+
+.right-arm {
+    left: 226px;
+
+    transform:
+        rotate(58deg);
+}
+
+
+/* =====================================
+   BOOTS
+   ===================================== */
+
+.venu-boot {
+    position: absolute;
+
+    width: 30px;
+    height: 54px;
+
+    border-radius:
+        8px 8px 11px 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d7d7df,
+            #777782
+        );
+
+    border:
+        2px solid #555560;
+
+    z-index: 9;
+}
+
+
+/*
+   Boot on the upper leg.
+*/
+
+.left-boot {
+    left: 286px;
+    top: 295px;
+
+    transform:
+        rotate(-12deg);
+}
+
+
+/*
+   Boot on the lower leg.
+*/
+
+.right-boot {
+    left: 323px;
+    top: 330px;
+
+    transform:
+        rotate(8deg);
+}
+
+
+/* =====================================
+   TALK BUTTON
+   ===================================== */
+
+.venu-talk-button {
+    margin-top: 22px;
+
+    padding:
+        12px 22px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 1rem;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7650c8,
+            #4e348d
+        );
+
+    box-shadow:
+        0 8px 20px
+        rgba(
+            0,
+            0,
+            0,
+            0.25
+        );
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.venu-talk-button:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 24px
+        rgba(
+            0,
+            0,
+            0,
+            0.35
+        );
+}
+
+
+/* =====================================
+   DIALOGUE
+   ===================================== */
+
+.venu-dialogue {
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 24px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(
+            20,
+            18,
+            48,
+            0.92
+        );
+
+    border:
+        1px solid
+        rgba(
+            210,
+            190,
+            255,
+            0.25
+        );
+
+    color: #eeeef5;
+
+    box-shadow:
+        0 15px 40px
+        rgba(
+            0,
+            0,
+            0,
+            0.25
+        );
+}
+
+.venu-dialogue-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.venu-dialogue p {
+    line-height: 1.7;
+}
+
+.venu-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.venu-choices button {
+    border: none;
+    border-radius: 999px;
+
+    padding:
+        10px 16px;
+
+    cursor: pointer;
+
+    color: #29233d;
+
+    background: #eee9ff;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.venu-choices button:hover {
+    transform:
+        translateY(-2px);
+}
+
+
+/* =====================================
+   ABOUT VENU
+   ===================================== */
+
+.venu-about {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.venu-symbol {
+    font-size: 5rem;
+    opacity: 0.85;
+}
+
+
+/* =====================================
+   MOBILE
+   ===================================== */
+
+@media (max-width: 600px) {
+
+    .venu-stage {
+        min-height: 540px;
+    }
+
+    .venu-character {
+        transform:
+            scale(0.78);
+    }
+
+    .venu-about {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .venu-choices {
+        flex-direction: column;
+    }
+
+    .venu-choices button {
+        width: 100%;
+    }
+
+}
+
+
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js"></script>
+
+</body>
+</html>

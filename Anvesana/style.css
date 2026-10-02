@@ -1,0 +1,2488 @@
+/* ========================================
+   ANVEṢAṆA
+   A little universe to explore.
+======================================== */
+
+/* ---------- BASIC ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    color: #F7F4FF;
+    background:
+        radial-gradient(
+            circle at 50% 15%,
+            #243B78 0%,
+            #111D4A 28%,
+            #080F2B 62%,
+            #030717 100%
+        );
+    overflow-x: hidden;
+}
+
+/* ---------- STARS ---------- */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.9) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.7) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle,
+            rgba(180,210,255,0.7) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        140px 140px,
+        230px 230px,
+        310px 310px;
+
+    background-position:
+        20px 30px,
+        80px 100px,
+        150px 50px;
+
+    opacity: 0.55;
+    z-index: -1;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 6vw;
+    position: relative;
+    z-index: 20;
+}
+
+/* ---------- BRAND ---------- */
+
+.brand-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ---------- LOGO ---------- */
+
+.logo {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 15px rgba(180, 200, 255, 0.45);
+}
+
+/* ========================================
+   STARDUST BUTTON
+======================================== */
+
+.stardust-button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+
+    filter:
+        drop-shadow(
+            0 0 7px rgba(255, 220, 90, 0.7)
+        );
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+.stardust-button:hover {
+    transform:
+        scale(1.25)
+        rotate(8deg);
+
+    filter:
+        drop-shadow(
+            0 0 14px rgba(255, 220, 90, 1)
+        );
+}
+
+/* ========================================
+   STARDUST PANEL
+======================================== */
+
+.stardust-panel {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    width: 280px;
+    padding: 25px;
+
+    border:
+        1px solid rgba(255, 220, 120, 0.25);
+
+    border-radius: 20px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255, 220, 100, 0.12),
+            transparent 45%
+        ),
+        rgba(7, 13, 38, 0.94);
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(255, 215, 100, 0.08);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(-10px)
+        scale(0.96);
+
+    transform-origin: top left;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease,
+        transform 0.2s ease;
+}
+
+.stardust-panel.open {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.stardust-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    color: #FFE68A;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.stardust-total {
+    margin-top: 15px;
+    text-align: center;
+
+    color: #FFF4B8;
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 1;
+
+    text-shadow:
+        0 0 20px rgba(255, 220, 100, 0.4);
+}
+
+.stardust-label {
+    margin: 8px 0 0;
+    text-align: center;
+
+    color: #A99D73;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.stardust-divider {
+    height: 1px;
+    margin: 22px 0;
+
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            rgba(255, 220, 120, 0.3),
+            transparent
+        );
+}
+
+.history-heading {
+    margin: 0 0 12px;
+
+    color: #B7BDE0;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.stardust-history {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.empty-history {
+    margin: 0;
+
+    color: #697397;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* ========================================
+   ACCOUNT AREA
+======================================== */
+
+.account-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Main account button */
+
+#accountButton {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #9DAEFF,
+            #4C5CA8 38%,
+            #171C50 70%,
+            #080A24 100%
+        );
+
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 18px;
+
+    box-shadow:
+        0 0 15px rgba(130, 150, 255, 0.25),
+        inset 0 0 12px rgba(255, 255, 255, 0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+#accountButton:hover {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 0 25px rgba(150, 170, 255, 0.45),
+        inset 0 0 15px rgba(255, 255, 255, 0.12);
+}
+
+/* ========================================
+   ACCOUNT PANEL
+======================================== */
+
+#accountPanel {
+    position: absolute;
+    top: 54px;
+    right: 0;
+    width: 430px;
+    padding: 30px;
+
+    border:
+        1px solid rgba(160, 180, 255, 0.18);
+
+    border-radius: 28px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(110, 130, 240, 0.14),
+            transparent 45%
+        ),
+        rgba(5, 9, 31, 0.97);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        0 0 45px rgba(90, 110, 220, 0.08);
+
+    z-index: 100;
+
+    /* Hidden until account button is clicked */
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(-10px)
+        scale(0.96);
+
+    transform-origin: top right;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Visible state */
+
+#accountPanel.open {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+/* ========================================
+   ACCOUNT CHOICE
+======================================== */
+
+#loggedOutView {
+    text-align: center;
+}
+
+#loggedOutView::before {
+    content: "YOUR LITTLE UNIVERSE";
+    display: block;
+    margin-bottom: 25px;
+
+    color: #7186C5;
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+/* Put login and signup side by side */
+
+#showLogin,
+#showSignup {
+    position: relative;
+
+    width: 145px;
+    height: 190px;
+
+    padding: 125px 10px 10px;
+
+    border: none;
+    background: transparent;
+
+    color: #DCE5FF;
+    cursor: pointer;
+
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+}
+
+#showLogin:hover,
+#showSignup:hover {
+    color: #FFFFFF;
+    transform: translateY(-6px);
+}
+
+/* ========================================
+   SATURN — LOGIN
+======================================== */
+
+#showLogin::before {
+    content: "";
+
+    position: absolute;
+
+    width: 82px;
+    height: 82px;
+
+    top: 28px;
+    left: 31px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #B7C4FF 0%,
+            #6979D0 28%,
+            #39498F 58%,
+            #171D4E 100%
+        );
+
+    box-shadow:
+        0 0 18px rgba(120, 145, 255, 0.35),
+        inset -10px -8px 18px rgba(0, 0, 0, 0.35);
+
+    z-index: 2;
+}
+
+/* Saturn ring */
+
+#showLogin::after {
+    content: "";
+
+    position: absolute;
+
+    width: 135px;
+    height: 40px;
+
+    top: 50px;
+    left: 4px;
+
+    border:
+        3px solid rgba(176, 190, 255, 0.72);
+
+    border-left-color:
+        rgba(100, 120, 220, 0.4);
+
+    border-right-color:
+        rgba(210, 220, 255, 0.8);
+
+    border-radius: 50%;
+
+    transform:
+        rotate(-13deg);
+
+    box-shadow:
+        0 0 12px rgba(140, 160, 255, 0.25);
+
+    z-index: 3;
+    pointer-events: none;
+}
+
+#showLogin:hover::before {
+    box-shadow:
+        0 0 28px rgba(130, 155, 255, 0.6),
+        inset -10px -8px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* ========================================
+   BLACK HOLE — SIGN UP
+======================================== */
+
+#showSignup::before {
+    content: "";
+
+    position: absolute;
+
+    width: 88px;
+    height: 88px;
+
+    top: 25px;
+    left: 28px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #02030B 0%,
+            #02030B 31%,
+            #15132F 43%,
+            #473E92 58%,
+            #8B6DFF 68%,
+            transparent 72%
+        );
+
+    box-shadow:
+        0 0 18px rgba(130, 90, 255, 0.35),
+        0 0 45px rgba(90, 70, 220, 0.15);
+
+    z-index: 2;
+}
+
+/* Black hole accretion disk */
+
+#showSignup::after {
+    content: "";
+
+    position: absolute;
+
+    width: 138px;
+    height: 48px;
+
+    top: 47px;
+    left: 3px;
+
+    border-radius: 50%;
+
+    border:
+        4px solid rgba(142, 111, 255, 0.65);
+
+    border-left-color:
+        rgba(84, 66, 190, 0.35);
+
+    border-right-color:
+        rgba(190, 165, 255, 0.75);
+
+    transform:
+        rotate(-18deg);
+
+    box-shadow:
+        0 0 15px rgba(125, 95, 255, 0.45);
+
+    z-index: 1;
+    pointer-events: none;
+}
+
+#showSignup:hover::before {
+    box-shadow:
+        0 0 30px rgba(140, 100, 255, 0.65),
+        0 0 55px rgba(90, 70, 220, 0.25);
+}
+
+/* ========================================
+   ACCOUNT FORMS
+======================================== */
+
+#signupView,
+#loginView {
+    text-align: center;
+}
+
+#signupView h2,
+#loginView h2 {
+    margin: 0 0 25px;
+
+    color: #E9EDFF;
+    font-size: 25px;
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+
+#signupView input,
+#loginView input {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 13px 15px;
+
+    border:
+        1px solid rgba(150, 170, 240, 0.2);
+
+    border-radius: 14px;
+    outline: none;
+
+    background:
+        rgba(25, 33, 75, 0.65);
+
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 13px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+#signupView input:focus,
+#loginView input:focus {
+    border-color:
+        rgba(160, 180, 255, 0.65);
+
+    box-shadow:
+        0 0 18px rgba(120, 145, 255, 0.12);
+}
+
+#signupView input::placeholder,
+#loginView input::placeholder {
+    color: #69779F;
+}
+
+/* Form buttons */
+
+#signupButton,
+#loginButton {
+    width: 100%;
+    margin-top: 8px;
+    padding: 13px 20px;
+
+    border:
+        1px solid rgba(170, 190, 255, 0.3);
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(100, 125, 220, 0.28),
+            rgba(75, 65, 160, 0.2)
+        );
+
+    color: #F7F4FF;
+    cursor: pointer;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    transition:
+        background 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+#signupButton:hover,
+#loginButton:hover {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(125, 150, 255, 0.38),
+            rgba(95, 80, 190, 0.3)
+        );
+
+    box-shadow:
+        0 0 25px rgba(120, 145, 255, 0.18);
+
+    transform: translateY(-2px);
+}
+
+/* Back buttons */
+
+#backFromSignup,
+#backFromLogin {
+    margin-top: 15px;
+    padding: 7px 12px;
+
+    border: none;
+    background: transparent;
+
+    color: #7584AD;
+    cursor: pointer;
+
+    font-size: 11px;
+}
+
+#backFromSignup:hover,
+#backFromLogin:hover {
+    color: #C8D2FF;
+}
+
+/* Messages */
+
+#signupMessage,
+#loginMessage {
+    min-height: 18px;
+    margin: 12px 0 0;
+
+    color: #9FAEDB;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* ========================================
+   LOGGED-IN ACCOUNT
+======================================== */
+
+#loggedInView {
+    text-align: center;
+}
+
+#loggedInView h2 {
+    margin: 0 0 8px;
+
+    color: #E9EDFF;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+#accountEmail {
+    margin: 0 0 25px;
+
+    color: #8190BA;
+    font-size: 12px;
+}
+
+#logoutButton {
+    padding: 11px 22px;
+
+    border:
+        1px solid rgba(170, 190, 255, 0.22);
+
+    border-radius: 25px;
+
+    background:
+        rgba(100, 125, 210, 0.1);
+
+    color: #D8E0FF;
+    cursor: pointer;
+
+    font-size: 11px;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+#logoutButton:hover {
+    background:
+        rgba(130, 155, 255, 0.18);
+
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    color: #C7D2F5;
+    text-decoration: none;
+
+    font-size: 13px;
+    letter-spacing: 1px;
+
+    transition:
+        color 0.25s ease,
+        text-shadow 0.25s ease;
+}
+
+nav a:hover {
+    color: #FFFFFF;
+
+    text-shadow:
+        0 0 10px rgba(190, 210, 255, 0.8);
+}
+
+/* ========================================
+   MAIN
+======================================== */
+
+main {
+    width: min(1100px, 88%);
+    margin: auto;
+    position: relative;
+}
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero {
+    min-height: 82vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    position: relative;
+    padding: 80px 0;
+}
+
+.eyebrow {
+    margin: 0 0 20px;
+
+    color: #AFC5FF;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    margin: 0;
+
+    font-size: clamp(65px, 12vw, 150px);
+    line-height: 0.9;
+    letter-spacing: -6px;
+    font-weight: 800;
+
+    text-shadow:
+        0 0 25px rgba(170, 190, 255, 0.2);
+}
+
+.hero h1 span {
+    display: block;
+
+    color: #B5C7FF;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -5px;
+
+    text-shadow:
+        0 0 35px rgba(160, 190, 255, 0.35);
+}
+
+.hero-text {
+    max-width: 570px;
+    margin: 35px auto;
+
+    color: #B8C4E8;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+/* ========================================
+   EXPLORE BUTTON
+======================================== */
+
+.explore-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 15px 25px;
+
+    border:
+        1px solid rgba(190, 210, 255, 0.45);
+
+    border-radius: 50px;
+
+    background:
+        rgba(100, 130, 210, 0.12);
+
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 14px;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.explore-button:hover {
+    background:
+        rgba(150, 180, 255, 0.2);
+
+    border-color:
+        rgba(220, 230, 255, 0.8);
+
+    box-shadow:
+        0 0 25px rgba(140, 170, 255, 0.25);
+
+    transform:
+        translateY(-3px);
+}
+
+/* ========================================
+   DISCOVERY
+======================================== */
+
+.discover {
+    padding: 120px 0;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    font-size: clamp(32px, 5vw, 55px);
+    font-weight: 400;
+    letter-spacing: -2px;
+}
+
+/* ========================================
+   DISCOVERY GRID
+======================================== */
+
+.discovery-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 25px;
+}
+
+.discovery-item {
+    min-height: 240px;
+    padding: 30px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    position: relative;
+
+    color: #FFFFFF;
+    text-decoration: none;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(100, 130, 220, 0.18),
+            rgba(20, 30, 75, 0.08) 55%,
+            transparent 70%
+        );
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease;
+}
+
+.discovery-item::before {
+    content: "";
+
+    position: absolute;
+    inset: 20px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(160, 190, 255, 0.08);
+
+    transition:
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.discovery-item:hover {
+    transform:
+        translateY(-10px)
+        scale(1.03);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(130, 160, 255, 0.3),
+            rgba(30, 45, 100, 0.12) 60%,
+            transparent 72%
+        );
+}
+
+.discovery-item:hover::before {
+    border-color:
+        rgba(190, 210, 255, 0.3);
+
+    box-shadow:
+        0 0 35px rgba(130, 160, 255, 0.15);
+}
+
+.discovery-number {
+    position: absolute;
+    top: 30px;
+
+    color: #6E83B8;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.discovery-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+
+    filter:
+        drop-shadow(
+            0 0 8px rgba(180, 200, 255, 0.25)
+        );
+}
+
+.discovery-title {
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.discovery-description {
+    max-width: 150px;
+
+    color: #8999C5;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.discovery-arrow {
+    margin-top: 15px;
+
+    color: #AFC5FF;
+
+    opacity: 0;
+    transform: translateY(5px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+.discovery-item:hover .discovery-arrow {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   RANDOM DISCOVERY
+======================================== */
+
+.random-discovery {
+    min-height: 300px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+
+    margin: 80px 0 140px;
+    padding: 60px;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background:
+        radial-gradient(
+            circle at 80% 50%,
+            rgba(100, 130, 220, 0.25),
+            transparent 45%
+        ),
+        rgba(10, 20, 55, 0.4);
+
+    border:
+        1px solid rgba(150, 175, 240, 0.15);
+
+    box-shadow:
+        inset 0 0 50px rgba(100, 130, 220, 0.05);
+}
+
+.random-discovery h2 {
+    max-width: 600px;
+    margin: 0;
+
+    font-size: clamp(30px, 5vw, 55px);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.random-discovery p:last-child {
+    max-width: 500px;
+
+    color: #9BAAD0;
+    line-height: 1.7;
+}
+
+.discovery-symbol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 110px;
+    height: 110px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    color: #FFFFFF;
+    font-size: 35px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(210, 225, 255, 0.5),
+            rgba(100, 130, 220, 0.12) 45%,
+            transparent 70%
+        );
+
+    filter:
+        drop-shadow(
+            0 0 25px rgba(170, 200, 255, 0.35)
+        );
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+    padding: 35px 6vw;
+
+    text-align: center;
+
+    color: #62739C;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+/* ========================================
+   READ — LIBRARY
+======================================== */
+
+.library-section {
+    padding: 80px 0 100px;
+}
+
+.library-heading {
+    margin-bottom: 55px;
+}
+
+.library-label {
+    margin: 0 0 12px;
+
+    color: #8FA9E8;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.library-heading h1,
+.reading-header h1 {
+    margin: 0;
+
+    color: #F7F4FF;
+    font-size: clamp(38px, 6vw, 65px);
+    font-weight: 400;
+    letter-spacing: -2px;
+}
+
+.library-heading p:not(.library-label) {
+    max-width: 600px;
+    margin-top: 18px;
+
+    color: #9BAAD0;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* ========================================
+   LIBRARY ROOM
+======================================== */
+
+.library-room {
+    position: relative;
+
+    padding: 45px 30px 35px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(31, 43, 92, 0.55),
+            rgba(7, 13, 38, 0.75)
+        );
+
+    border:
+        1px solid rgba(160, 185, 255, 0.14);
+
+    box-shadow:
+        inset 0 0 60px rgba(100, 130, 220, 0.06),
+        0 25px 70px rgba(0, 0, 0, 0.25);
+}
+
+.library-shelf-top,
+.library-shelf-bottom {
+    height: 14px;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #52659C,
+            #252F5A
+        );
+
+    box-shadow:
+        0 7px 15px rgba(0, 0, 0, 0.35);
+}
+
+.library-shelf-bottom {
+    margin-top: 25px;
+}
+
+.library-bookshelf {
+    min-height: 250px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(150px, 1fr));
+
+    align-items: end;
+
+    gap: 24px;
+
+    padding: 45px 20px 5px;
+}
+
+.library-loading {
+    grid-column: 1 / -1;
+
+    margin: 0;
+
+    text-align: center;
+
+    color: #7182AF;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* ========================================
+   LIBRARY BOOK CARDS
+======================================== */
+
+.library-book {
+    min-height: 190px;
+    padding: 25px 18px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+
+    border-radius: 7px 14px 14px 7px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+    background:
+        linear-gradient(
+            135deg,
+            #384B86,
+            #1B2855
+        );
+
+    box-shadow:
+        8px 10px 20px rgba(0, 0, 0, 0.35);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.library-book:hover {
+    transform:
+        translateY(-10px)
+        rotate(-1deg);
+
+    box-shadow:
+        12px 18px 30px rgba(0, 0, 0, 0.45),
+        0 0 25px rgba(130, 160, 255, 0.12);
+}
+
+.library-book::before {
+    content: "";
+
+    position: absolute;
+
+    top: 12px;
+    bottom: 12px;
+    left: 8px;
+
+    width: 3px;
+
+    border-radius: 3px;
+
+    background:
+        rgba(255, 255, 255, 0.14);
+}
+
+.library-book-title {
+    margin: 0;
+
+    color: #FFFFFF;
+    font-size: 17px;
+    line-height: 1.35;
+}
+
+.library-book-author {
+    margin: 12px 0 0;
+
+    color: #AAB9E7;
+    font-size: 11px;
+}
+
+.library-book-open {
+    align-self: flex-start;
+
+    margin-top: 20px;
+    padding: 7px 11px;
+
+    border:
+        1px solid rgba(190, 210, 255, 0.25);
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    color: #DCE5FF;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ========================================
+   BOOK READING SECTION
+======================================== */
+
+.book-reading-section {
+    display: none;
+    padding: 50px 0 100px;
+}
+
+.book-reading-section.active {
+    display: block;
+}
+
+.back-library-button {
+    margin-bottom: 35px;
+    padding: 10px 17px;
+
+    border:
+        1px solid rgba(180, 200, 255, 0.22);
+
+    border-radius: 30px;
+
+    background:
+        rgba(100, 130, 210, 0.08);
+
+    color: #C7D2F5;
+    cursor: pointer;
+
+    font-size: 12px;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.back-library-button:hover {
+    background:
+        rgba(130, 160, 255, 0.16);
+
+    transform:
+        translateX(-4px);
+}
+
+.reading-header {
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+#readingBookAuthor {
+    margin: 14px 0 0;
+
+    color: #8F9FC9;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* ========================================
+   OPEN BOOK
+======================================== */
+
+.open-book {
+    width: 100%;
+    max-width: 1050px;
+    min-height: 570px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 18px 1fr;
+
+    position: relative;
+
+    border-radius: 12px;
+
+    filter:
+        drop-shadow(
+            0 25px 40px rgba(0, 0, 0, 0.45)
+        );
+}
+
+/* ---------- PAGES ---------- */
+
+.book-page {
+    min-height: 570px;
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 60px 55px 65px;
+
+    color: #29243A;
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFFDF5 0%,
+            #F5F0DE 100%
+        );
+
+    box-shadow:
+        inset 0 0 35px rgba(100, 80, 40, 0.08);
+}
+
+.left-page {
+    border-radius:
+        16px 3px 3px 16px;
+
+    border-right:
+        1px solid rgba(80, 65, 40, 0.12);
+}
+
+.right-page {
+    border-radius:
+        3px 16px 16px 3px;
+
+    border-left:
+        1px solid rgba(80, 65, 40, 0.12);
+}
+
+/* ---------- PAGE INNER ---------- */
+
+.page-content-inner {
+    height: 100%;
+    overflow-y: auto;
+
+    padding-right: 8px;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #B5A982
+        transparent;
+}
+
+.page-content-inner::-webkit-scrollbar {
+    width: 5px;
+}
+
+.page-content-inner::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+
+    background:
+        #B5A982;
+}
+
+.page-content-inner p {
+    margin:
+        0 0 18px;
+
+    color: #393348;
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.page-content-inner h2,
+.page-content-inner h3 {
+    color: #29243A;
+    line-height: 1.3;
+}
+
+.page-content-inner h2 {
+    margin-top: 0;
+    font-size: 26px;
+}
+
+.page-content-inner h3 {
+    font-size: 19px;
+}
+
+/* ---------- SPINE ---------- */
+
+.book-spine {
+    min-height: 570px;
+
+    position: relative;
+    z-index: 5;
+
+    background:
+        linear-gradient(
+            90deg,
+            #C9BE9F,
+            #F3EEDC 45%,
+            #B5AA8D
+        );
+
+    box-shadow:
+        inset 4px 0 8px rgba(60, 45, 20, 0.12),
+        inset -4px 0 8px rgba(60, 45, 20, 0.12);
+}
+
+/* ========================================
+   PAGE NUMBERS
+======================================== */
+
+.page-number {
+    position: absolute;
+    bottom: 25px;
+
+    color: #8F856C;
+
+    font-size: 11px;
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-style: italic;
+}
+
+.left-page .page-number {
+    left: 35px;
+}
+
+.right-page .page-number {
+    right: 35px;
+}
+
+/* ========================================
+   BOOK CONTROLS
+======================================== */
+
+.book-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 25px;
+
+    margin-top: 35px;
+}
+
+.book-nav-button {
+    min-width: 120px;
+    padding: 12px 18px;
+
+    border:
+        1px solid rgba(170, 190, 245, 0.25);
+
+    border-radius: 30px;
+
+    background:
+        rgba(100, 130, 210, 0.1);
+
+    color: #DDE5FF;
+    cursor: pointer;
+
+    font-size: 12px;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.book-nav-button:hover {
+    background:
+        rgba(130, 160, 255, 0.2);
+
+    border-color:
+        rgba(190, 210, 255, 0.5);
+
+    transform:
+        translateY(-2px);
+}
+
+.book-nav-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#pageIndicator {
+    min-width: 100px;
+
+    text-align: center;
+
+    color: #8798C5;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* ========================================
+   MOBILE — BOOK
+======================================== */
+
+@media (max-width: 800px) {
+
+    .site-header {
+        padding: 20px;
+    }
+
+    .stardust-panel {
+        left: 0;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    nav a {
+        font-size: 11px;
+    }
+
+    .hero h1 {
+        font-size: 65px;
+        letter-spacing: -3px;
+    }
+
+    .discovery-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .random-discovery {
+        padding: 35px;
+
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 40px;
+    }
+
+    .library-bookshelf {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .open-book {
+        grid-template-columns:
+            1fr;
+    }
+
+    .book-page {
+        min-height: 420px;
+
+        padding:
+            45px 30px 60px;
+    }
+
+    .left-page {
+        border-radius:
+            14px 14px 3px 3px;
+
+        border-right: none;
+
+        border-bottom:
+            1px solid rgba(80, 65, 40, 0.15);
+    }
+
+    .right-page {
+        border-radius:
+            3px 3px 14px 14px;
+
+        border-left: none;
+    }
+
+    .book-spine {
+        display: none;
+    }
+
+    .book-controls {
+        gap: 10px;
+    }
+
+    .book-nav-button {
+        min-width: 105px;
+    }
+
+    /* Account */
+
+    #accountPanel {
+        right: -10px;
+
+        width: 390px;
+        max-width: calc(100vw - 30px);
+    }
+}
+
+@media (max-width: 500px) {
+
+    .site-header {
+        align-items: flex-start;
+    }
+
+    .discovery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .discovery-item {
+        min-height: 220px;
+    }
+
+    .stardust-panel {
+        width: 250px;
+    }
+
+    .library-bookshelf {
+        grid-template-columns: 1fr;
+    }
+
+    .library-room {
+        padding:
+            30px 15px 25px;
+    }
+
+    .book-page {
+        min-height: 380px;
+
+        padding:
+            35px 22px 55px;
+    }
+
+    .book-controls {
+        flex-wrap: wrap;
+    }
+
+    #pageIndicator {
+        order: -1;
+        flex-basis: 100%;
+    }
+
+    /* Account */
+
+    #accountPanel {
+        right: -5px;
+
+        width: 300px;
+        padding: 22px 15px;
+    }
+
+    #showLogin,
+    #showSignup {
+        width: 125px;
+        height: 175px;
+        padding-top: 120px;
+    }
+
+    #showLogin::before {
+        left: 22px;
+    }
+
+    #showLogin::after {
+        left: -5px;
+    }
+
+    #showSignup::before {
+        left: 19px;
+    }
+
+    #showSignup::after {
+        left: -8px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE HEADER FIX
+======================================== */
+
+@media (max-width: 900px) {
+
+    .site-header {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .site-header {
+        padding: 20px;
+    }
+
+    .brand-area {
+        max-width: calc(100% - 60px);
+    }
+
+    nav {
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        font-size: 10px;
+    }
+
+}
+/* ========================================
+   ACCOUNT PAGES
+======================================== */
+
+.account-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 50px 20px;
+
+    overflow-x: hidden;
+
+}
+
+
+.account-page-container {
+
+    width: 100%;
+
+    max-width: 520px;
+
+    position: relative;
+
+}
+
+
+.account-back {
+
+    display: inline-block;
+
+    margin-bottom: 25px;
+
+    color: #AEBEFF;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+
+}
+
+
+.account-back:hover {
+
+    color: #FFFFFF;
+
+    transform:
+        translateX(-4px);
+
+}
+
+
+.account-card {
+
+    position: relative;
+
+    width: 100%;
+
+    padding:
+        55px
+        55px
+        45px;
+
+    border:
+        1px solid
+        rgba(160, 180, 255, 0.18);
+
+    border-radius: 35px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(90, 110, 220, 0.16),
+            transparent 48%
+        ),
+        rgba(5, 9, 31, 0.94);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 30px 90px
+        rgba(0, 0, 0, 0.55),
+
+        0 0 60px
+        rgba(90, 110, 220, 0.08);
+
+    text-align: center;
+
+}
+
+
+.account-eyebrow {
+
+    margin:
+        15px 0 12px;
+
+    color: #7186C5;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.account-card h1 {
+
+    margin:
+        0 0 12px;
+
+    color: #F7F4FF;
+
+    font-size: 36px;
+
+    letter-spacing: -1px;
+
+}
+
+
+.account-page-intro {
+
+    margin:
+        0 0 35px;
+
+    color: #9CA9D4;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+
+}
+
+
+.account-card form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: left;
+
+}
+
+
+.account-card label {
+
+    margin:
+        0 0 8px;
+
+    color: #C8D2F4;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+}
+
+
+.account-input,
+.account-card input {
+
+    width: 100%;
+
+    padding:
+        14px 16px;
+
+    margin:
+        0 0 20px;
+
+    border:
+        1px solid
+        rgba(150, 170, 230, 0.18);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background:
+        rgba(12, 20, 55, 0.8);
+
+    color: #F7F4FF;
+
+    font-size: 14px;
+
+    transition:
+        border 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.account-card input::placeholder {
+
+    color: #68759E;
+
+}
+
+
+.account-card input:focus {
+
+    border-color:
+        rgba(150, 175, 255, 0.6);
+
+    box-shadow:
+        0 0 20px
+        rgba(100, 130, 255, 0.12);
+
+}
+
+
+.account-page-button {
+
+    width: 100%;
+
+    padding:
+        15px 20px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6178D9,
+            #8A6DD1
+        );
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.account-page-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(100, 120, 220, 0.25);
+
+}
+
+
+.account-page-message {
+
+    min-height: 20px;
+
+    margin:
+        16px 0 0;
+
+    color: #AEBEFF;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    text-align: center;
+
+}
+
+
+.account-switch {
+
+    margin:
+        25px 0 0;
+
+    color: #7886AD;
+
+    font-size: 12px;
+
+}
+
+
+.account-switch a {
+
+    color: #B8C7FF;
+
+    text-decoration: none;
+
+}
+
+
+.account-switch a:hover {
+
+    color: white;
+
+}
+
+
+/* ========================================
+   LOGIN — SATURN
+======================================== */
+
+.login-planet {
+
+    width: 145px;
+
+    height: 145px;
+
+    margin:
+        0 auto;
+
+    position: relative;
+
+}
+
+
+.login-planet-body {
+
+    position: absolute;
+
+    width: 92px;
+
+    height: 92px;
+
+    left: 26px;
+
+    top: 27px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #687ED1,
+            #394A9A 42%,
+            #171E59 75%,
+            #090D2B
+        );
+
+    box-shadow:
+        0 0 30px
+        rgba(100, 120, 240, 0.28);
+
+}
+
+
+.login-planet-ring {
+
+    position: absolute;
+
+    width: 145px;
+
+    height: 42px;
+
+    left: 0;
+
+    top: 52px;
+
+    border:
+        3px solid
+        rgba(157, 176, 255, 0.75);
+
+    border-radius: 50%;
+
+    transform:
+        rotate(-14deg);
+
+}
+
+
+.login-planet-ring.ring-two {
+
+    width: 132px;
+
+    height: 34px;
+
+    left: 7px;
+
+    top: 56px;
+
+    border:
+        1px solid
+        rgba(112, 133, 230, 0.4);
+
+}
+
+
+.login-planet-stars {
+
+    position: absolute;
+
+    width: 100%;
+
+    top: -5px;
+
+    color: #B9C7FF;
+
+    font-size: 14px;
+
+    letter-spacing: 10px;
+
+    white-space: nowrap;
+
+    opacity: 0.8;
+
+}
+
+
+/* ========================================
+   SIGNUP — BLACK HOLE
+======================================== */
+
+.signup-black-hole {
+
+    width: 155px;
+
+    height: 155px;
+
+    margin:
+        0 auto;
+
+    position: relative;
+
+}
+
+
+.black-hole-core {
+
+    position: absolute;
+
+    width: 70px;
+
+    height: 70px;
+
+    left: 42px;
+
+    top: 42px;
+
+    border-radius: 50%;
+
+    background:
+        #01020A;
+
+    box-shadow:
+        0 0 20px
+        #02030E,
+
+        0 0 45px
+        rgba(80, 70, 210, 0.5);
+
+    z-index: 4;
+
+}
+
+
+.black-hole-glow {
+
+    position: absolute;
+
+    width: 125px;
+
+    height: 125px;
+
+    left: 15px;
+
+    top: 15px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            transparent 25%,
+            rgba(104, 83, 230, 0.22) 48%,
+            transparent 70%
+        );
+
+    filter:
+        blur(5px);
+
+}
+
+
+.black-hole-disk {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    transform:
+        rotate(-16deg);
+
+}
+
+
+.black-hole-disk.disk-one {
+
+    width: 150px;
+
+    height: 58px;
+
+    left: 2px;
+
+    top: 49px;
+
+    border:
+        5px solid
+        rgba(123, 91, 236, 0.7);
+
+    box-shadow:
+        0 0 25px
+        rgba(107, 77, 230, 0.45);
+
+    z-index: 2;
+
+}
+
+
+.black-hole-disk.disk-two {
+
+    width: 125px;
+
+    height: 43px;
+
+    left: 15px;
+
+    top: 57px;
+
+    border:
+        2px solid
+        rgba(179, 157, 255, 0.5);
+
+    z-index: 3;
+
+}
+
+
+.black-hole-stars {
+
+    position: absolute;
+
+    top: -5px;
+
+    left: 5px;
+
+    color: #C4B8FF;
+
+    font-size: 13px;
+
+    letter-spacing: 7px;
+
+    white-space: nowrap;
+
+    z-index: 6;
+
+}
+
+
+/* ========================================
+   ACCOUNT PAGE MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .account-page {
+
+        padding:
+            30px 15px;
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .account-page-container {
+
+        margin-top: 15px;
+
+    }
+
+
+    .account-card {
+
+        padding:
+            40px 25px 35px;
+
+        border-radius:
+            28px;
+
+    }
+
+
+    .account-card h1 {
+
+        font-size: 30px;
+
+    }
+
+}

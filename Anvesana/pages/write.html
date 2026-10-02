@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Write — Anveṣaṇa</title>
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+    <div class="brand-area">
+
+        <a
+            class="logo"
+            href="../index.html"
+        >
+            Anveṣaṇa
+        </a>
+
+
+        <button
+            class="stardust-button"
+            id="stardustButton"
+            type="button"
+        >
+            ⭐
+        </button>
+
+
+        <div
+            class="stardust-panel"
+            id="stardustPanel"
+        >
+
+            <div class="stardust-title">
+                <span>⭐</span>
+                <span>Stardust</span>
+            </div>
+
+            <div
+                class="stardust-total"
+                id="stardustTotal"
+            >
+                0
+            </div>
+
+            <p class="stardust-label">
+                Stardust
+            </p>
+
+            <div class="stardust-divider"></div>
+
+            <p class="history-heading">
+                Recent discoveries
+            </p>
+
+            <div
+                class="stardust-history"
+                id="stardustHistory"
+            >
+                <p class="empty-history">
+                    Your Stardust journey starts here.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="../index.html">
+            Home
+        </a>
+
+        <a href="play.html">
+            Play
+        </a>
+
+        <a href="character.html">
+            Character
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<main>
+
+
+    <section class="hero">
+
+        <p class="eyebrow">
+            ✦ CREATE
+        </p>
+
+        <h1>
+            Make something.
+        </h1>
+
+        <p class="hero-text">
+            A blank page is just another universe waiting to exist.
+        </p>
+
+    </section>
+
+
+
+    <section class="writing-space">
+
+        <div class="section-heading">
+
+            <p class="eyebrow">
+                ✦ YOUR CREATION
+            </p>
+
+            <h2>
+                What will you make?
+            </h2>
+
+        </div>
+
+
+        <form id="writingForm">
+
+
+            <label for="writingTitle">
+                Title
+            </label>
+
+            <input
+                type="text"
+                id="writingTitle"
+                maxlength="100"
+                placeholder="Give your creation a name..."
+            >
+
+
+            <label for="writingAuthor">
+                Name / Pen name
+            </label>
+
+            <input
+                type="text"
+                id="writingAuthor"
+                maxlength="60"
+                placeholder="What should readers call you?"
+            >
+
+
+            <label for="writingContent">
+                Your writing
+            </label>
+
+            <textarea
+                id="writingContent"
+                placeholder="Start writing..."
+            ></textarea>
+
+
+            <div class="publish-choice">
+
+                <p>
+                    What do you want to do with it?
+                </p>
+
+
+                <label class="choice-option">
+
+                    <input
+                        type="radio"
+                        name="publishChoice"
+                        value="publish"
+                        checked
+                    >
+
+                    <span>
+                        📖 Publish to Read
+                    </span>
+
+                </label>
+
+
+                <label class="choice-option">
+
+                    <input
+                        type="radio"
+                        name="publishChoice"
+                        value="private"
+                    >
+
+                    <span>
+                        🔒 Keep private
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="writing-submit"
+            >
+                Create →
+            </button>
+
+
+            <p
+                id="writingMessage"
+                class="writing-message"
+            ></p>
+
+
+        </form>
+
+    </section>
+
+
+</main>
+
+
+
+<footer>
+
+    <p>
+        Anveṣaṇa · Explore everything.
+    </p>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../script.js"></script>
+
+</body>
+
+</html>

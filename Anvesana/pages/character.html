@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Venu · Anveṣaṇa</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+
+    <style>
+
+        /* =====================================
+           VENU
+           ===================================== */
+
+        .venu-area {
+
+            width: min(1100px, 94%);
+
+            margin: 0 auto 80px;
+
+        }
+
+
+        .venu-stage {
+
+            min-height: 600px;
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            border-radius: 30px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(105, 78, 180, 0.22),
+                    transparent 48%
+                );
+
+            box-shadow:
+                inset 0 0 80px rgba(0, 0, 0, 0.18);
+
+        }
+
+
+
+        /* =====================================
+           STARS
+           ===================================== */
+
+        .venu-star {
+
+            position: absolute;
+
+            opacity: 0.6;
+
+            animation:
+                venu-twinkle 3s ease-in-out infinite;
+
+        }
+
+
+        .star-one {
+
+            top: 16%;
+
+            left: 18%;
+
+        }
+
+
+        .star-two {
+
+            top: 30%;
+
+            right: 18%;
+
+            animation-delay: 1s;
+
+        }
+
+
+        .star-three {
+
+            bottom: 28%;
+
+            left: 25%;
+
+            animation-delay: 1.7s;
+
+        }
+
+
+        .star-four {
+
+            bottom: 20%;
+
+            right: 27%;
+
+            animation-delay: 2.3s;
+
+        }
+
+
+
+        @keyframes venu-twinkle {
+
+            0%,
+            100% {
+
+                opacity: 0.25;
+
+                transform:
+                    scale(0.8);
+
+            }
+
+
+            50% {
+
+                opacity: 0.9;
+
+                transform:
+                    scale(1.2);
+
+            }
+
+        }
+
+
+
+        /* =====================================
+           CHARACTER
+           ===================================== */
+
+        .venu-character {
+
+            width: 230px;
+
+            height: 390px;
+
+            position: relative;
+
+            cursor: pointer;
+
+            animation:
+                venu-float 4s ease-in-out infinite;
+
+            transform-origin:
+                center bottom;
+
+            transition:
+                transform 0.25s ease;
+
+        }
+
+
+        .venu-character:hover {
+
+            transform:
+                scale(1.04);
+
+        }
+
+
+
+        @keyframes venu-float {
+
+            0%,
+            100% {
+
+                transform:
+                    translateY(0);
+
+            }
+
+
+            50% {
+
+                transform:
+                    translateY(-12px);
+
+            }
+
+        }
+
+
+
+        /* =====================================
+           ORIGINAL BOTTOM MOON
+           ===================================== */
+
+        .venu-moon {
+
+            position: absolute;
+
+            width: 210px;
+
+            height: 100px;
+
+            left: 10px;
+
+            bottom: 65px;
+
+            border-radius:
+                0 0 110px 110px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #eee8ff,
+                    #aaa0dc
+                );
+
+            box-shadow:
+                0 10px 35px rgba(160, 140, 255, 0.35);
+
+            transform:
+                rotate(-3deg);
+
+        }
+
+
+        .moon-inner {
+
+            position: absolute;
+
+            width: 185px;
+
+            height: 90px;
+
+            top: -1px;
+
+            left: 28px;
+
+            border-radius:
+                0 0 100px 100px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    rgba(18, 15, 50, 0.95),
+                    rgba(18, 15, 50, 0.95)
+                );
+
+        }
+
+
+
+        /* =====================================
+           SECOND MOON — FLIPPED COPY
+           ===================================== */
+
+        .venu-moon-top {
+
+            position: absolute;
+
+            width: 210px;
+
+            height: 100px;
+
+            right: 14px;
+
+            bottom: 164px;
+
+            border-radius:
+                0 0 110px 110px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #eee8ff,
+                    #aaa0dc
+                );
+
+            box-shadow:
+                0 10px 35px rgba(160, 140, 255, 0.35);
+
+            transform:
+                rotate(-3deg) scaleY(-1);
+
+        }
+
+
+        .moon-top-inner {
+
+            position: absolute;
+
+            width: 185px;
+
+            height: 90px;
+
+            top: 0px;
+
+            left: 25px;
+
+            border-radius:
+                0 0 100px 100px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    rgba(18, 15, 50, 0.95),
+                    rgba(18, 15, 50, 0.95)
+                );
+
+        }
+
+
+
+        /* =====================================
+           BODY
+           ===================================== */
+
+        .venu-body {
+
+            position: absolute;
+
+            left: 75px;
+
+            top: 165px;
+
+            width: 80px;
+
+            height: 185px;
+
+            z-index: 4;
+
+        }
+
+
+        .venu-dress {
+
+            position: absolute;
+
+            width: 82px;
+
+            height: 125px;
+
+            top: 25px;
+
+            left: 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #285b45,
+                    #3c8a67,
+                    #285b45
+                );
+
+            border-radius:
+                25px 25px 14px 14px;
+
+            clip-path:
+                polygon(
+                    20% 0,
+                    80% 0,
+                    100% 100%,
+                    0 100%
+                );
+
+        }
+
+
+        .venu-jacket {
+
+            position: absolute;
+
+            width: 80px;
+
+            height: 95px;
+
+            top: 25px;
+
+            left: -1px;
+
+            border-radius:
+                20px 20px 8px 8px;
+
+            border-left:
+                13px solid #14131b;
+
+            border-right:
+                13px solid #14131b;
+
+            pointer-events: none;
+
+        }
+
+
+        .venu-pants {
+
+            position: absolute;
+
+            top: 138px;
+
+            left: 16px;
+
+            display: flex;
+
+            gap: 5px;
+
+            z-index: 6;
+
+        }
+
+
+        .venu-pants span {
+
+            width: 22px;
+
+            height: 52px;
+
+            background:
+                #15151c;
+
+            border-radius:
+                4px 4px 8px 8px;
+
+        }
+
+
+
+        /* =====================================
+           HEAD
+           ===================================== */
+
+        .venu-head {
+
+            position: absolute;
+
+            top: 100px;
+
+            left: 77px;
+
+            width: 76px;
+
+            height: 88px;
+
+            z-index: 5;
+
+        }
+
+
+        .venu-face {
+
+            position: absolute;
+
+            width: 70px;
+
+            height: 78px;
+
+            top: 8px;
+
+            left: 3px;
+
+            background:
+                #a96f52;
+
+            border-radius:
+                45% 45% 48% 48%;
+
+        }
+
+
+
+        /* =====================================
+           HAIR
+           ===================================== */
+
+        .venu-hair {
+
+            position: absolute;
+
+            width: 84px;
+
+            height: 95px;
+
+            top: -4px;
+
+            left: -4px;
+
+            z-index: 3;
+
+            pointer-events: none;
+
+        }
+
+
+        .hair-top {
+
+            position: absolute;
+
+            width: 84px;
+
+            height: 48px;
+
+            top: 0;
+
+            left: 0;
+
+            background:
+                #111116;
+
+            border-radius:
+                48px 48px 25px 25px;
+
+        }
+
+
+        .hair-left,
+        .hair-right {
+
+            position: absolute;
+
+            width: 15px;
+
+            height: 58px;
+
+            top: 28px;
+
+            background:
+                #111116;
+
+            border-radius:
+                15px;
+
+        }
+
+
+        .hair-left {
+
+            left: 0;
+
+            transform:
+                rotate(5deg);
+
+        }
+
+
+        .hair-right {
+
+            right: 0;
+
+            transform:
+                rotate(-5deg);
+
+        }
+
+
+
+        /* =====================================
+           EYES
+           ===================================== */
+
+        .venu-eye {
+
+            position: absolute;
+
+            top: 45px;
+
+            width: 7px;
+
+            height: 10px;
+
+            background:
+                #111116;
+
+            border-radius: 50%;
+
+            z-index: 5;
+
+        }
+
+
+        .left-eye {
+
+            left: 19px;
+
+        }
+
+
+        .right-eye {
+
+            right: 19px;
+
+        }
+
+
+
+        /* =====================================
+           CAT-EYE GLASSES
+           ===================================== */
+
+        .venu-glasses {
+
+            position: absolute;
+
+            top: 40px;
+
+            width: 29px;
+
+            height: 19px;
+
+            border:
+                2px solid #17151b;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            z-index: 6;
+
+        }
+
+
+        .left-glass {
+
+            left: 5px;
+
+            border-radius:
+                4px 14px 8px 14px;
+
+        }
+
+
+        .right-glass {
+
+            right: 5px;
+
+            border-radius:
+                14px 4px 14px 8px;
+
+        }
+
+
+        .glasses-bridge {
+
+            position: absolute;
+
+            top: 45px;
+
+            left: 31px;
+
+            width: 8px;
+
+            height: 2px;
+
+            background:
+                #17151b;
+
+            z-index: 7;
+
+        }
+
+
+
+        /* =====================================
+           MOUTH
+           ===================================== */
+
+        .mouth {
+
+            position: absolute;
+
+            top: 65px;
+
+            left: 29px;
+
+            width: 12px;
+
+            height: 6px;
+
+            border-bottom:
+                2px solid #17151b;
+
+            border-radius:
+                0 0 10px 10px;
+
+            z-index: 10;
+
+        }
+
+
+
+        /* =====================================
+           STAR EARRINGS
+           ===================================== */
+
+        .star-earring {
+
+            position: absolute;
+
+            top: 60px;
+
+            color:
+                #d9dce5;
+
+            font-size:
+                11px;
+
+            z-index: 8;
+
+            text-shadow:
+                0 0 6px rgba(220, 225, 255, 0.6);
+
+        }
+
+
+        .left-earring {
+
+            left: 1px;
+
+        }
+
+
+        .right-earring {
+
+            right: 1px;
+
+        }
+
+
+
+        /* =====================================
+           NECKLACE
+           ===================================== */
+
+        .venu-necklace {
+
+            position: absolute;
+
+            top: 190px;
+
+            left: 105px;
+
+            width: 20px;
+
+            height: 22px;
+
+            border:
+                2px solid rgba(180, 130, 220, 0.8);
+
+            border-top: none;
+
+            border-radius:
+                0 0 20px 20px;
+
+            z-index: 6;
+
+        }
+
+
+        .venu-necklace span {
+
+            position: absolute;
+
+            width: 12px;
+
+            height: 12px;
+
+            bottom: -8px;
+
+            left: 2px;
+
+            background:
+                #8e4dcc;
+
+            transform:
+                rotate(45deg);
+
+            box-shadow:
+                0 0 12px rgba(150, 80, 230, 0.7);
+
+        }
+
+
+
+        /* =====================================
+           BOOK
+           ===================================== */
+
+        .venu-book {
+
+            position: absolute;
+
+            width: 105px;
+
+            height: 65px;
+
+            left: 63px;
+
+            top: 225px;
+
+            z-index: 15;
+
+            transform:
+                rotate(-5deg);
+
+        }
+
+
+        .book-page-left,
+        .book-page-right {
+
+            position: absolute;
+
+            width: 52px;
+
+            height: 58px;
+
+            top: 0;
+
+            background:
+                #7A3438;
+
+            border:
+                2px solid #57252A;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .book-page-left {
+
+            left: 0;
+
+            border-radius:
+                8px 2px 2px 8px;
+
+        }
+
+
+        .book-page-right {
+
+            right: 0;
+
+            border-radius:
+                2px 8px 8px 2px;
+
+        }
+
+
+
+        /* =====================================
+           ARMS / JACKET SLEEVES
+           ===================================== */
+
+        .venu-arm {
+
+            position: absolute;
+
+            width: 20px;
+
+            height: 58px;
+
+            top: 205px;
+
+            background: #14131b;
+
+            border-radius: 15px;
+
+            z-index: 13;
+
+        }
+
+
+        .left-arm {
+
+            left: 58px;
+
+            transform:
+                rotate(24deg);
+
+        }
+
+
+        .right-arm {
+
+            right: 58px;
+
+            transform:
+                rotate(-24deg);
+
+        }
+
+
+
+        /* =====================================
+           HANDS
+           ===================================== */
+
+        .hand {
+
+            position: absolute;
+
+            width: 18px;
+
+            height: 18px;
+
+            bottom: -10px;
+
+            left: 1px;
+
+            background: #a96f52;
+
+            border-radius: 50%;
+
+            z-index: 14;
+
+        }
+
+
+
+        /* =====================================
+           BOOTS
+           ===================================== */
+
+        .venu-boot {
+
+            position: absolute;
+
+            width: 30px;
+
+            height: 35px;
+
+            bottom: 70px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #c7ccd5,
+                    #737b88
+                );
+
+            border-radius:
+                5px 5px 9px 9px;
+
+            z-index: 8;
+
+            box-shadow:
+                inset 0 0 0 2px rgba(30, 30, 40, 0.25);
+
+        }
+
+
+        .left-boot {
+
+            left: 85px;
+
+        }
+
+
+        .right-boot {
+
+            right: 85px;
+
+        }
+
+
+
+        /* =====================================
+           TALK BUTTON
+           ===================================== */
+
+        .venu-talk-button {
+
+            position: relative;
+
+            z-index: 50;
+
+            margin-top: 25px;
+
+            padding:
+                12px 24px;
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            border-radius: 30px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            color: inherit;
+
+            cursor: pointer;
+
+            pointer-events: auto;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+
+        }
+
+
+        .venu-talk-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(255,255,255,0.13);
+
+        }
+
+
+
+        /* =====================================
+           DIALOGUE
+           ===================================== */
+
+        .venu-dialogue {
+
+            max-width: 650px;
+
+            margin:
+                30px auto 0;
+
+            padding: 25px;
+
+            border:
+                1px solid rgba(255,255,255,0.12);
+
+            border-radius: 20px;
+
+            background:
+                rgba(20, 15, 45, 0.75);
+
+            backdrop-filter:
+                blur(12px);
+
+            box-shadow:
+                0 15px 45px rgba(0,0,0,0.25);
+
+        }
+
+
+        /* IMPORTANT:
+           Forces the dialogue to stay hidden
+           until JavaScript reveals it.
+        */
+
+        #venuDialogue[hidden] {
+
+            display: none !important;
+
+        }
+
+
+        #venuDialogue:not([hidden]) {
+
+            display: block;
+
+        }
+
+
+        .venu-dialogue-name {
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .venu-dialogue p {
+
+            line-height: 1.7;
+
+        }
+
+
+        .venu-choices {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .venu-choices button {
+
+            padding:
+                9px 14px;
+
+            border:
+                1px solid rgba(255,255,255,0.12);
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            color: inherit;
+
+            cursor: pointer;
+
+        }
+
+
+        .venu-choices button:hover {
+
+            background:
+                rgba(255,255,255,0.12);
+
+        }
+
+
+
+        /* =====================================
+           ABOUT
+           ===================================== */
+
+        .venu-symbol {
+
+            font-size: 4rem;
+
+            animation:
+                venu-float 4s ease-in-out infinite;
+
+        }
+
+
+
+        /* =====================================
+           RESPONSIVE
+           ===================================== */
+
+        @media (max-width: 600px) {
+
+            .venu-stage {
+
+                min-height: 540px;
+
+            }
+
+
+            .venu-character {
+
+                transform:
+                    scale(0.9);
+
+            }
+
+
+            .venu-character:hover {
+
+                transform:
+                    scale(0.94);
+
+            }
+
+
+            .venu-choices {
+
+                flex-direction: column;
+
+            }
+
+
+            .venu-choices button {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="site-header">
+
+        <div class="brand-area">
+
+            <a class="logo" href="../index.html">
+                Anveṣaṇa
+            </a>
+
+
+            <button
+                class="stardust-button"
+                id="stardustButton"
+                type="button"
+                aria-label="Open Stardust">
+
+                ⭐
+
+            </button>
+
+
+            <div
+                class="stardust-panel"
+                id="stardustPanel">
+
+                <div class="stardust-title">
+
+                    <span>⭐</span>
+                    <span>Stardust</span>
+
+                </div>
+
+
+                <div
+                    class="stardust-total"
+                    id="stardustTotal">
+
+                    0
+
+                </div>
+
+
+                <p class="stardust-label">
+
+                    Stardust
+
+                </p>
+
+
+                <div class="stardust-divider"></div>
+
+
+                <p class="history-heading">
+
+                    Recent discoveries
+
+                </p>
+
+
+                <div
+                    class="stardust-history"
+                    id="stardustHistory">
+
+                    <p class="empty-history">
+
+                        Your Stardust journey
+                        starts here.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="play.html">
+                Play
+            </a>
+
+            <a href="character.html">
+                Character
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- MAIN -->
+
+    <main>
+
+
+        <!-- INTRO -->
+
+        <section class="hero">
+
+            <p class="eyebrow">
+
+                ✦ THE WRITER AMONG THE STARS
+
+            </p>
+
+
+            <h1>
+
+                Meet<br>
+
+                <span>Venu.</span>
+
+            </h1>
+
+
+            <p class="hero-text">
+
+                She has been writing something
+                for as long as anyone can remember.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- VENU -->
+
+        <section class="venu-area">
+
+            <div class="venu-stage">
+
+
+                <!-- STARS -->
+
+                <span class="venu-star star-one">✦</span>
+
+                <span class="venu-star star-two">✧</span>
+
+                <span class="venu-star star-three">·</span>
+
+                <span class="venu-star star-four">✦</span>
+
+
+
+                <!-- VENU -->
+
+                <div
+                    class="venu-character"
+                    id="venuCharacter"
+                    title="Talk to Venu">
+
+
+                    <!-- BODY -->
+
+                    <div class="venu-body">
+
+                        <div class="venu-dress"></div>
+
+                        <div class="venu-jacket"></div>
+
+                        <div class="venu-pants">
+
+                            <span></span>
+
+                            <span></span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- HEAD -->
+
+                    <div class="venu-head">
+
+                        <div class="venu-hair">
+
+                            <span class="hair-left"></span>
+
+                            <span class="hair-right"></span>
+
+                            <span class="hair-top"></span>
+
+                        </div>
+
+
+                        <div class="venu-face">
+
+                            <span class="venu-eye left-eye"></span>
+
+                            <span class="venu-eye right-eye"></span>
+
+                            <span class="venu-glasses left-glass"></span>
+
+                            <span class="venu-glasses right-glass"></span>
+
+                            <span class="glasses-bridge"></span>
+
+                            <span class="mouth"></span>
+
+                            <span class="star-earring left-earring">
+                                ★
+                            </span>
+
+                            <span class="star-earring right-earring">
+                                ★
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- NECKLACE -->
+
+                    <div class="venu-necklace">
+
+                        <span></span>
+
+                    </div>
+
+
+
+                    <!-- BOOK -->
+
+                    <div class="venu-book">
+
+                        <div class="book-page-left"></div>
+
+                        <div class="book-page-right"></div>
+
+                    </div>
+
+
+
+                    <!-- ARMS -->
+
+                    <div class="venu-arm left-arm">
+
+                        <span class="hand"></span>
+
+                    </div>
+
+
+                    <div class="venu-arm right-arm">
+
+                        <span class="hand"></span>
+
+                    </div>
+
+
+
+                    <!-- BOOTS -->
+
+                    <div class="venu-boot left-boot"></div>
+
+                    <div class="venu-boot right-boot"></div>
+
+
+
+                    <!-- ORIGINAL BOTTOM MOON -->
+
+                    <div class="venu-moon">
+
+                        <div class="moon-inner"></div>
+
+                    </div>
+
+
+
+                    <!-- SECOND TOP SEMICIRCLE -->
+
+                    <div class="venu-moon-top">
+
+                        <div class="moon-top-inner"></div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- TALK BUTTON -->
+
+                <button
+                    id="talkToVenu"
+                    class="venu-talk-button"
+                    type="button">
+
+                    ✦ Talk to Venu
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- DIALOGUE -->
+
+            <div
+                id="venuDialogue"
+                class="venu-dialogue"
+                aria-live="polite"
+                hidden>
+
+
+                <div class="venu-dialogue-name">
+
+                    🌙 Venu
+
+                </div>
+
+
+                <p id="venuDialogueText">
+
+                    Oh! Hello there.
+
+                </p>
+
+
+                <div
+                    id="venuChoices"
+                    class="venu-choices">
+
+
+                    <button
+                        type="button"
+                        data-venu-action="help">
+
+                        ❓ How does Anveṣaṇa work?
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        data-venu-action="updates">
+
+                        ✨ What's new?
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        data-venu-action="about">
+
+                        🌌 Tell me about Anveṣaṇa
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        data-venu-action="bye">
+
+                        📖 I'll let you write.
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ABOUT VENU -->
+
+        <section class="random-discovery venu-about">
+
+
+            <div>
+
+                <p class="eyebrow">
+
+                    ✦ THE ONE WHO WRITES
+
+                </p>
+
+
+                <h2>
+
+                    She is always working
+                    on something.
+
+                </h2>
+
+
+                <p>
+
+                    Venu lives among the stars
+                    of Anveṣaṇa. When she isn't
+                    helping an explorer, she's
+                    usually writing in her book.
+
+                </p>
+
+            </div>
+
+
+            <div class="venu-symbol">
+
+                🌙
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- CUSTOMIZATION -->
+
+        <section class="discover">
+
+
+            <div class="section-heading">
+
+                <p class="eyebrow">
+
+                    YOUR EXPLORER
+
+                </p>
+
+
+                <h2>
+
+                    Now make your own.
+
+                </h2>
+
+            </div>
+
+
+
+            <div class="discovery-grid">
+
+
+                <a
+                    class="discovery-item"
+                    href="#">
+
+                    <span class="discovery-icon">
+
+                        👕
+                    </span>
+
+
+                    <span class="discovery-title">
+
+                        Outfits
+
+                    </span>
+
+
+                    <span class="discovery-description">
+
+                        Clothes and looks to
+                        change whenever you want.
+
+                    </span>
+
+
+                    <span class="discovery-arrow">
+
+                        →
+
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    class="discovery-item"
+                    href="#">
+
+                    <span class="discovery-icon">
+
+                        🎒
+
+                    </span>
+
+
+                    <span class="discovery-title">
+
+                        Accessories
+
+                    </span>
+
+
+                    <span class="discovery-description">
+
+                        Little things to give
+                        your character personality.
+
+                    </span>
+
+
+                    <span class="discovery-arrow">
+
+                        →
+
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    class="discovery-item"
+                    href="#">
+
+                    <span class="discovery-icon">
+
+                        🌌
+
+                    </span>
+
+
+                    <span class="discovery-title">
+
+                        Backgrounds
+
+                    </span>
+
+
+                    <span class="discovery-description">
+
+                        Give your character
+                        somewhere beautiful to exist.
+
+                    </span>
+
+
+                    <span class="discovery-arrow">
+
+                        →
+
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+
+            Anveṣaṇa · Explore everything.
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- MAIN WEBSITE JAVASCRIPT -->
+
+    <script src="../script.js"></script>
+
+
+
+    <!-- VENU JAVASCRIPT -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const talkButton =
+                    document.getElementById(
+                        "talkToVenu"
+                    );
+
+
+                const venu =
+                    document.getElementById(
+                        "venuCharacter"
+                    );
+
+
+                const dialogue =
+                    document.getElementById(
+                        "venuDialogue"
+                    );
+
+
+                const dialogueText =
+                    document.getElementById(
+                        "venuDialogueText"
+                    );
+
+
+                if (
+                    !talkButton ||
+                    !dialogue ||
+                    !dialogueText
+                ) {
+
+                    return;
+
+                }
+
+
+
+                function talkToVenu() {
+
+                    dialogue.hidden = false;
+
+                    dialogueText.textContent =
+                        "Oh! Hello there. What can I help you with?";
+
+                }
+
+
+
+                talkButton.addEventListener(
+                    "click",
+                    talkToVenu
+                );
+
+
+
+                if (venu) {
+
+                    venu.addEventListener(
+                        "click",
+                        talkToVenu
+                    );
+
+                }
+
+
+
+                document
+                    .querySelectorAll(
+                        "[data-venu-action]"
+                    )
+                    .forEach(
+                        function (button) {
+
+                            button.addEventListener(
+                                "click",
+                                function () {
+
+                                    const action =
+                                        button.getAttribute(
+                                            "data-venu-action"
+                                        );
+
+
+
+                                    if (
+                                        action === "help"
+                                    ) {
+
+                                        dialogue.hidden =
+                                            false;
+
+                                        dialogueText.textContent =
+                                            "You can explore the different sections of Anveṣaṇa using the navigation above. Read lets you explore books, Write lets you create them, Play has things to discover, and Character is where you can build your own explorer.";
+
+                                    }
+
+
+
+                                    else if (
+                                        action === "updates"
+                                    ) {
+
+                                        dialogue.hidden =
+                                            false;
+
+                                        dialogueText.textContent =
+                                            "There aren't any new announcements just yet. But keep exploring. You never know what might appear among the stars.";
+
+                                    }
+
+
+
+                                    else if (
+                                        action === "about"
+                                    ) {
+
+                                        dialogue.hidden =
+                                            false;
+
+                                        dialogueText.textContent =
+                                            "Anveṣaṇa is a little universe built for curiosity. You can read, write, play, learn, focus, and create your own explorer while collecting Stardust along the way.";
+
+                                    }
+
+
+
+                                    else if (
+                                        action === "bye"
+                                    ) {
+
+                                        dialogue.hidden =
+                                            false;
+
+                                        dialogueText.textContent =
+                                            "Alright. I'll get back to my writing. There are quite a few things left to put on these pages.";
+
+
+                                        setTimeout(
+                                            function () {
+
+                                                dialogue.hidden =
+                                                    true;
+
+                                            },
+                                            1800
+                                        );
+
+                                    }
+
+                                }
+                            );
+
+                        }
+                    );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

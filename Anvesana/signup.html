@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Create account — Anveṣaṇa</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+</head>
+
+
+<body class="account-page">
+
+
+    <main class="account-page-container">
+
+
+        <a
+            href="index.html"
+            class="account-back">
+
+            ← Back to Anveṣaṇa
+
+        </a>
+
+
+        <section class="account-card">
+
+
+            <!-- BLACK HOLE -->
+
+            <div
+                class="signup-black-hole"
+                aria-hidden="true">
+
+                <div class="black-hole-stars">
+                    ✦ · ˚ ✧ · ˚
+                </div>
+
+                <div class="black-hole-glow"></div>
+
+                <div class="black-hole-disk disk-one"></div>
+
+                <div class="black-hole-disk disk-two"></div>
+
+                <div class="black-hole-core"></div>
+
+            </div>
+
+
+            <p class="account-eyebrow">
+
+                ✦ ENTER THE UNIVERSE
+
+            </p>
+
+
+            <h1>
+
+                Create your account
+
+            </h1>
+
+
+            <p class="account-page-intro">
+
+                Make a little universe of your own.
+
+            </p>
+
+
+            <form id="signupForm">
+
+
+                <label
+                    for="signupEmail">
+
+                    Email
+
+                </label>
+
+
+                <input
+                    id="signupEmail"
+                    type="email"
+                    placeholder="Your email"
+                    autocomplete="email"
+                    required>
+
+
+                <label
+                    for="signupPassword">
+
+                    Password
+
+                </label>
+
+
+                <input
+                    id="signupPassword"
+                    type="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    required>
+
+
+                <button
+                    id="signupButton"
+                    class="account-page-button"
+                    type="submit">
+
+                    Create account
+
+                </button>
+
+
+                <p
+                    id="signupMessage"
+                    class="account-page-message"
+                    aria-live="polite">
+                </p>
+
+
+            </form>
+
+
+            <p class="account-switch">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Log in
+                </a>
+
+            </p>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- SUPABASE -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

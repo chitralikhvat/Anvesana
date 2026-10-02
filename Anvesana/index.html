@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Anveṣaṇa</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="site-header">
+
+
+        <!-- LOGO + STARDUST -->
+
+        <div class="brand-area">
+
+            <a
+                class="logo"
+                href="index.html">
+
+                Anveṣaṇa
+
+            </a>
+
+
+            <button
+                class="stardust-button"
+                id="stardustButton"
+                type="button"
+                aria-label="Open Stardust">
+
+                ⭐
+
+            </button>
+
+
+            <!-- STARDUST POPUP -->
+
+            <div
+                class="stardust-panel"
+                id="stardustPanel">
+
+
+                <div class="stardust-title">
+
+                    <span>⭐</span>
+
+                    <span>Stardust</span>
+
+                </div>
+
+
+                <div
+                    class="stardust-total"
+                    id="stardustTotal">
+
+                    0
+
+                </div>
+
+
+                <p class="stardust-label">
+
+                    Stardust
+
+                </p>
+
+
+                <div class="stardust-divider"></div>
+
+
+                <p class="history-heading">
+
+                    Recent discoveries
+
+                </p>
+
+
+                <div
+                    class="stardust-history"
+                    id="stardustHistory">
+
+                    <p class="empty-history">
+
+                        Your Stardust journey
+                        starts here.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="pages/play.html">
+                Play
+            </a>
+
+            <a href="pages/character.html">
+                Character
+            </a>
+
+        </nav>
+
+
+
+        <!-- ACCOUNT -->
+
+        <div class="account-area">
+
+            <button
+                id="accountButton"
+                class="account-button"
+                type="button">
+
+                👤
+
+            </button>
+
+
+          <div
+    id="accountPanel"
+    class="account-panel">
+
+
+                <!-- LOGGED OUT -->
+
+                <div
+                    id="loggedOutView"
+                    class="account-view">
+
+                    <div class="account-icon">
+                        ✦
+                    </div>
+
+                    <h3>
+                        Your Anveṣaṇa
+                    </h3>
+
+                    <p>
+                        Create an account to keep
+                        your Stardust, character and
+                        writings with you.
+                    </p>
+
+
+                    <button
+                        id="showSignup"
+                        class="account-action-button"
+                        type="button">
+
+                        Create account
+
+                    </button>
+
+
+                    <button
+                        id="showLogin"
+                        class="account-secondary-button"
+                        type="button">
+
+                        Log in
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- SIGN UP -->
+
+                <div
+                    id="signupView"
+                    class="account-view"
+                    hidden>
+
+                    <div class="account-icon">
+                        ✦
+                    </div>
+
+                    <h3>
+                        Create your account
+                    </h3>
+
+                    <input
+                        id="signupEmail"
+                        class="account-input"
+                        type="email"
+                        placeholder="Email"
+                        autocomplete="email">
+
+                    <input
+                        id="signupPassword"
+                        class="account-input"
+                        type="password"
+                        placeholder="Password"
+                        autocomplete="new-password">
+
+
+                    <button
+                        id="signupButton"
+                        class="account-action-button"
+                        type="button">
+
+                        Create account
+
+                    </button>
+
+
+                    <button
+                        id="backFromSignup"
+                        class="account-secondary-button"
+                        type="button">
+
+                        Back
+
+                    </button>
+
+
+                    <p
+                        id="signupMessage"
+                        class="account-message">
+                    </p>
+
+                </div>
+
+
+
+                <!-- LOGIN -->
+
+                <div
+                    id="loginView"
+                    class="account-view"
+                    hidden>
+
+                    <div class="account-icon">
+                        ✦
+                    </div>
+
+                    <h3>
+                        Welcome back
+                    </h3>
+
+                    <input
+                        id="loginEmail"
+                        class="account-input"
+                        type="email"
+                        placeholder="Email"
+                        autocomplete="email">
+
+                    <input
+                        id="loginPassword"
+                        class="account-input"
+                        type="password"
+                        placeholder="Password"
+                        autocomplete="current-password">
+
+
+                    <button
+                        id="loginButton"
+                        class="account-action-button"
+                        type="button">
+
+                        Log in
+
+                    </button>
+
+
+                    <button
+                        id="backFromLogin"
+                        class="account-secondary-button"
+                        type="button">
+
+                        Back
+
+                    </button>
+
+
+                    <p
+                        id="loginMessage"
+                        class="account-message">
+                    </p>
+
+                </div>
+
+
+
+                <!-- LOGGED IN -->
+
+                <div
+                    id="loggedInView"
+                    class="account-view"
+                    hidden>
+
+                    <div class="account-icon">
+                        ✦
+                    </div>
+
+                    <h3>
+                        Welcome back!
+                    </h3>
+
+                    <p
+                        id="accountEmail">
+                    </p>
+
+
+                    <button
+                        id="logoutButton"
+                        class="account-action-button"
+                        type="button">
+
+                        Log out
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+
+
+    <!-- MAIN -->
+
+    <main>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <p class="eyebrow">
+
+                ✦ A PLACE FOR THE CURIOUS
+
+            </p>
+
+
+            <h1>
+
+                Explore<br>
+
+                <span>everything.</span>
+
+            </h1>
+
+
+            <p class="hero-text">
+
+                Stories, strange facts, puzzles,
+                ideas, creativity and little things
+                worth discovering.
+
+            </p>
+
+
+            <a
+                class="explore-button"
+                href="pages/play.html">
+
+                Begin exploring →
+
+            </a>
+
+        </section>
+
+
+
+
+
+        <!-- DISCOVERY AREA -->
+
+        <section class="discover">
+
+
+            <div class="section-heading">
+
+                <p class="eyebrow">
+
+                    YOUR NEXT DISCOVERY
+
+                </p>
+
+
+                <h2>
+
+                    Where do you want to wander?
+
+                </h2>
+
+            </div>
+
+
+
+
+
+            <div class="discovery-grid">
+
+
+                <!-- READ -->
+
+                <a
+                    class="discovery-item"
+                    href="pages/read.html">
+
+                    <span class="discovery-number">
+
+                        01
+
+                    </span>
+
+
+                    <span class="discovery-icon">
+
+                        📖
+
+                    </span>
+
+
+                    <span class="discovery-title">
+
+                        Read
+
+                    </span>
+
+
+                    <span class="discovery-description">
+
+                        Stories, poems and worlds
+                        created by curious people.
+
+                    </span>
+
+
+                    <span class="discovery-arrow">
+
+                        →
+
+                    </span>
+
+                </a>
+
+
+
+
+
+                <!-- WRITE -->
+
+                <a
+                    class="discovery-item"
+                    href="pages/write.html">
+
+                    <span class="discovery-number">
+
+                        02
+
+                    </span>
+
+
+                    <span class="discovery-icon">
+
+                        ✍️
+
+                    </span>
+
+
+                    <span class="discovery-title">
+
+                        Write
+
+                    </span>
+
+
+                    <span class="discovery-description">
+
+                        Turn an idea in your head
+                        into something real.
+
+                    </span>
+
+
+                    <span class="discovery-arrow">
+
+                        →
+
+                    </span>
+
+                </a>
+
+
+
+
+
+                <!-- LEARN -->
+
+                <a
+                    class="discovery-item"
+                    href="pages/learn.html">
+
+                    <span class="discovery-number">
+
+                        03
+
+                    </span>
+
+
+                    <span class="discovery-icon">
+
+                        🧠
+
+                    </span>
+
+
+                    <span class="discovery-title">
+
+                        Learn
+
+                    </span>
+
+
+                    <span class="discovery-description">
+
+                        Discover facts that make you
+                        stop and say, "Wait, seriously?"
+
+                    </span>
+
+
+                    <span class="discovery-arrow">
+
+                        →
+
+                    </span>
+
+                </a>
+
+
+
+
+
+                <!-- PLAY -->
+
+                <a
+                    class="discovery-item"
+                    href="pages/play.html">
+
+                    <span class="discovery-number">
+
+                        04
+
+                    </span>
+
+
+                    <span class="discovery-icon">
+
+                        🧩
+
+                    </span>
+
+
+                    <span class="discovery-title">
+
+                        Play
+
+                    </span>
+
+
+                    <span class="discovery-description">
+
+                        Puzzles, quizzes and challenges
+                        for your brain.
+
+                    </span>
+
+
+                    <span class="discovery-arrow">
+
+                        →
+
+                    </span>
+
+                </a>
+
+
+
+
+
+                <!-- FOCUS -->
+
+                <a
+                    class="discovery-item"
+                    href="pages/focus.html">
+
+                    <span class="discovery-number">
+
+                        05
+
+                    </span>
+
+
+                    <span class="discovery-icon">
+
+                        ⏱️
+
+                    </span>
+
+
+                    <span class="discovery-title">
+
+                        Focus
+
+                    </span>
+
+
+                    <span class="discovery-description">
+
+                        A quiet place to concentrate,
+                        study or create.
+
+                    </span>
+
+
+                    <span class="discovery-arrow">
+
+                        →
+
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+
+
+        <!-- RANDOM DISCOVERY -->
+
+        <section class="random-discovery">
+
+
+            <div>
+
+                <p class="eyebrow">
+
+                    ✦ JUST BECAUSE
+
+                </p>
+
+
+                <h2>
+
+                    You never know what
+                    you'll find here.
+
+                </h2>
+
+
+                <p>
+
+                    Anveṣaṇa is a collection
+                    of things worth exploring.
+
+                </p>
+
+            </div>
+
+
+            <div class="discovery-symbol">
+
+                ✦
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+
+            Anveṣaṇa · Explore everything.
+
+        </p>
+
+    </footer>
+
+
+
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+    
+
+
+</body>
+
+</html>
