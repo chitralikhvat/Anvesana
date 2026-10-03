@@ -21,6 +21,8 @@ window.db =
     );
 const db = window.db;
 
+
+
 document.addEventListener(
     "DOMContentLoaded",
     function () {
@@ -346,103 +348,112 @@ if (showLogin) {
 
 
         /* ========================================
-           SIGN UP
-        ======================================== */
+   SIGN UP
+======================================== */
 
-        if (signupForm) {
+if (signupForm) {
 
-            signupForm.addEventListener(
-                "submit",
-                async function (event) {
+    signupForm.addEventListener(
+        "submit",
+        async function (event) {
 
-                    event.preventDefault();
+            event.preventDefault();
 
+            const email =
+                document.getElementById(
+                    "signupEmail"
+                ).value.trim();
 
-                    const email =
-                        document.getElementById(
-                            "signupEmail"
-                        ).value.trim();
+            const password =
+                document.getElementById(
+                    "signupPassword"
+                ).value;
 
+            const message =
+                document.getElementById(
+                    "signupMessage"
+                );
 
-                    const password =
-                        document.getElementById(
-                            "signupPassword"
-                        ).value;
+            message.textContent =
+                "Creating your account...";
 
+            try {
 
-                    const message =
-                        document.getElementById(
-                            "signupMessage"
-                        );
+                const {
+                    data,
+                    error
+                } =
+                    await db.auth.signUp({
 
+                        email:
+                            email,
+
+                        password:
+                            password
+
+                    });
+
+                if (error) {
+
+                    console.error(
+                        "Supabase signup error:",
+                        error
+                    );
 
                     message.textContent =
-                        "Creating your account...";
+                        error.message;
 
-
-                    const {
-                        data,
-                        error
-                    } =
-                        await db.auth.signUp({
-
-                            email:
-                                email,
-
-                            password:
-                                password
-
-                        });
-
-
-                    if (error) {
-
-                        console.error(
-                            "Supabase signup error:",
-                            error
-                        );
-
-
-                        message.textContent =
-                            error.message;
-
-                        return;
-
-                    }
-
-
-                    if (
-                        data &&
-                        data.session
-                    ) {
-
-                        message.textContent =
-                            "✦ Your account has been created!";
-
-
-                        setTimeout(
-                            function () {
-
-                                window.location.href =
-                                    "index.html";
-
-                            },
-                            1200
-                        );
-
-
-                    } else {
-
-                        message.textContent =
-                            "✦ Account created! Check your email to confirm your account.";
-
-                    }
+                    return;
 
                 }
-            );
+
+                console.log(
+                    "Supabase signup result:",
+                    data
+                );
+
+                if (
+                    data &&
+                    data.session
+                ) {
+
+                    message.textContent =
+                        "✦ Your account has been created!";
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "index.html";
+
+                        },
+                        1200
+                    );
+
+                } else {
+
+                    message.textContent =
+                        "✦ Account created! Check your email to confirm your account.";
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Unexpected signup error:",
+                    error
+                );
+
+                message.textContent =
+                    "Something went wrong: " +
+                    error.message;
+
+            }
 
         }
+    );
 
+}
 
         /* ========================================
            LOG IN
@@ -614,8 +625,7 @@ if (showLogin) {
             }
         );
 
-
-       /* ========================================
+/* ========================================
    WRITE
 ======================================== */
 
@@ -627,35 +637,173 @@ const writingForm =
 
 if (writingForm) {
 
+    const titleElement =
+        document.getElementById(
+            "writingTitle"
+        );
+
+
+    const authorElement =
+        document.getElementById(
+            "writingAuthor"
+        );
+
+
+    const contentElement =
+        document.getElementById(
+            "writingContent"
+        );
+
+
+    const message =
+        document.getElementById(
+            "writingMessage"
+        );
+
+
+    let currentUser = null;
+
+    let savedWriterName = null;
+
+
+    /*
+     * Load the logged-in user's
+     * permanent writer name.
+     */
+
+    async function loadWriterName() {
+
+        const {
+            data,
+            error: userError
+        } =
+            await db.auth.getUser();
+
+
+        if (userError) {
+
+            console.error(
+                "User loading error:",
+                userError
+            );
+
+            return;
+
+        }
+
+
+        currentUser =
+            data.user || null;
+
+
+        /*
+         * No account:
+         * author box stays editable.
+         */
+
+        if (!currentUser) {
+
+            authorElement.readOnly =
+                false;
+
+            return;
+
+        }
+
+
+        /*
+         * Get this user's profile.
+         */
+
+        const {
+            data: profile,
+            error: profileError
+        } =
+            await db
+                .from("profiles")
+                .select(
+                    "writer_name, name_locked"
+                )
+                .eq(
+                    "id",
+                    currentUser.id
+                )
+                .maybeSingle();
+
+
+        if (profileError) {
+
+            console.error(
+                "Profile loading error:",
+                profileError
+            );
+
+            message.textContent =
+                "Could not load your writer profile.";
+
+            return;
+
+        }
+
+
+        /*
+         * Existing permanent name.
+         */
+
+        if (
+            profile &&
+            profile.writer_name
+        ) {
+
+            savedWriterName =
+                profile.writer_name.trim();
+
+
+            authorElement.value =
+                savedWriterName;
+
+
+            authorElement.readOnly =
+                true;
+
+
+            return;
+
+        }
+
+
+        /*
+         * No name yet.
+         * Let the user choose one.
+         */
+
+        savedWriterName =
+            null;
+
+
+        authorElement.value =
+            "";
+
+
+        authorElement.readOnly =
+            false;
+
+    }
+
+
+    /*
+     * Wait for the profile to load
+     * before allowing the form to be used.
+     */
+
+    loadWriterName();
+
+
     writingForm.addEventListener(
         "submit",
         async function (event) {
 
             event.preventDefault();
-
-
-            const titleElement =
-                document.getElementById(
-                    "writingTitle"
-                );
-
-
-            const authorElement =
-                document.getElementById(
-                    "writingAuthor"
-                );
-
-
-            const contentElement =
-                document.getElementById(
-                    "writingContent"
-                );
-
-
-            const message =
-                document.getElementById(
-                    "writingMessage"
-                );
 
 
             const title =
@@ -676,9 +824,12 @@ if (writingForm) {
                 );
 
 
+            /*
+             * Required fields.
+             */
+
             if (
                 title === "" ||
-                author === "" ||
                 content === ""
             ) {
 
@@ -690,38 +841,77 @@ if (writingForm) {
             }
 
 
+            /*
+             * First-time writers and guests
+             * must provide an author name.
+             *
+             * Existing logged-in writers
+             * already have their saved name.
+             */
+
+            if (
+                !savedWriterName &&
+                author === ""
+            ) {
+
+                message.textContent =
+                    "Please enter an author name.";
+
+                return;
+
+            }
+
+
+            /*
+             * Get the current account again.
+             */
+
+            const {
+                data,
+                error: userError
+            } =
+                await db.auth.getUser();
+
+
+            if (userError) {
+
+                message.textContent =
+                    "Could not verify your account.";
+
+                return;
+
+            }
+
+
+            currentUser =
+                data.user || null;
+
+
+            /*
+             * If the user already has a permanent
+             * name, always use that name.
+             */
+
+            const authorToSave =
+                savedWriterName ||
+                author;
+
+
             const published =
                 !publishChoice ||
                 publishChoice.value === "publish";
 
 
-            /*
-             * Find out whether the writer
-             * is logged in.
-             *
-             * If they are logged in,
-             * we save their user ID.
-             *
-             * If they are not logged in,
-             * userId stays null.
-             */
-
-            const {
-                data: {
-                    user
-                }
-            } = await db.auth.getUser();
-
-
-            const userId =
-                user
-                    ? user.id
-                    : null;
-
-
             message.textContent =
                 "Publishing...";
 
+
+            /*
+             * Save the writing.
+             *
+             * The database trigger also enforces
+             * the permanent writer-name rule.
+             */
 
             const {
                 error
@@ -734,7 +924,7 @@ if (writingForm) {
                             title,
 
                         author:
-                            author,
+                            authorToSave,
 
                         content:
                             content,
@@ -743,7 +933,9 @@ if (writingForm) {
                             published,
 
                         user_id:
-                            userId
+                            currentUser
+                                ? currentUser.id
+                                : null
 
                     });
 
@@ -756,11 +948,55 @@ if (writingForm) {
                 );
 
 
-                message.textContent =
-                    "Database error: " +
-                    error.message;
+                if (
+                    error.message &&
+                    (
+                        error.message.includes(
+                            "profiles_writer_name_unique"
+                        ) ||
+                        error.message.includes(
+                            "duplicate key"
+                        )
+                    )
+                ) {
+
+                    message.textContent =
+                        "That author name is already taken. Please choose another.";
+
+                } else {
+
+                    message.textContent =
+                        "Database error: " +
+                        error.message;
+
+                }
+
 
                 return;
+
+            }
+
+
+            /*
+             * First successful writing:
+             * remember the name for this page.
+             */
+
+            if (
+                currentUser &&
+                !savedWriterName
+            ) {
+
+                savedWriterName =
+                    authorToSave;
+
+
+                authorElement.value =
+                    savedWriterName;
+
+
+                authorElement.readOnly =
+                    true;
 
             }
 
@@ -778,11 +1014,25 @@ if (writingForm) {
             }
 
 
-            titleElement.value = "";
+            titleElement.value =
+                "";
 
-            authorElement.value = "";
 
-            contentElement.value = "";
+            contentElement.value =
+                "";
+
+
+            /*
+             * Guests can choose a different
+             * author name for their next writing.
+             */
+
+            if (!currentUser) {
+
+                authorElement.value =
+                    "";
+
+            }
 
         }
     );
