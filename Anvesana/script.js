@@ -14,15 +14,12 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_I4vm084MARHTLUd4wIcMGw_21DlWR5K";
 
-const db = window.db;
-
 window.db =
     window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_PUBLISHABLE_KEY
     );
-
-
+const db = window.db;
 
 document.addEventListener(
     "DOMContentLoaded",
